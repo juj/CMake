@@ -62,7 +62,9 @@ public:
       return new cmGlobalVisualStudio10Generator(
         name, "Itanium", "CMAKE_FORCE_IA64");
       }
-    return 0;
+	while(*p == ' ') ++p;
+	return new cmGlobalVisualStudio10Generator(name, p, 0);
+//    return 0;
     }
 
   virtual void GetDocumentation(cmDocumentationEntry& entry) const
