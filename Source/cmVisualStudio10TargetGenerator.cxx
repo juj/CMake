@@ -1414,7 +1414,10 @@ void cmVisualStudio10TargetGenerator::WriteClOptions(
 
   clOptions.OutputPreprocessorDefinitions(*this->BuildFileStream, "      ",
                                           "\n", "CXX");
-  this->WriteString("<ObjectFileName>$(IntDir)</ObjectFileName>\n", 3);
+
+  cmMakefile* mf = this->Target->GetMakefile();
+  if (!mf->GetDefinition("CMAKE_VS_NO_DEFAULT_OBJECTFILENAME"))
+	this->WriteString("<ObjectFileName>$(IntDir)</ObjectFileName>\n", 3);
   this->WriteString("</ClCompile>\n", 2);
 }
 
